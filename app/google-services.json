@@ -1,0 +1,66 @@
+{
+  "project_info": {
+    "project_number": "158448958031",
+    "firebase_url": "https://moimaster-3be10.firebaseio.com",
+    "project_id": "moimaster-3be10",
+    "storage_bucket": "moimaster-3be10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158448958031:android:6d51c1344160e2e3",
+        "android_client_info": {
+          "package_name": "com.bonuskids.moimaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "158448958031-jb9bi18b027pjl46re88blnkvgcc4lvf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bonuskids.moimaster",
+            "certificate_hash": "68f42887957c578fcbb5e62fe4679d981667a187"
+          }
+        },
+        {
+          "client_id": "158448958031-eg7o2i7s9gasaeaps437uc6mt37gjem2.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "158448958031-uhj4s5ilufl07j2vjo2lkcjvb1n68925.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYzBv-wR6Q3h4yTz-rTA3-MMcA_bZvhtA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "158448958031-eg7o2i7s9gasaeaps437uc6mt37gjem2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "158448958031-foj0v3bcjkv6tm06eubq2dvahjgnlcpt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kz.amirnursultan.Moi-Master"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

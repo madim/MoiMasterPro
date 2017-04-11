@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MoiMaster</string>
+    <string name="web_client_id">158448958031-uhj4s5ilufl07j2vjo2lkcjvb1n68925.apps.googleusercontent.com</string>
+    <string name="title_home">Лента</string>
+    <string name="title_dashboard">Отклики</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="title_profile">Профиль</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

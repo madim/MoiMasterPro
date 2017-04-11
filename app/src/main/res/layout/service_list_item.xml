@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="service"
+            type="com.bonuskids.moimaster.data.Service"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@{service.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView4"
+            android:drawableEnd="@drawable/ic_info"
+            android:drawablePadding="8dp"
+            android:text="@{service.pricePerMinute}"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/book_button_background"
+            android:text="Book"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</layout>
