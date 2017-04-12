@@ -11,15 +11,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bonuskids.moimaster.data.Order;
 import com.bonuskids.moimaster.feed.FeedFragment;
 import com.bonuskids.moimaster.profile.ProfileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase mDatabase;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
             = new BottomNavigationView.OnNavigationItemReselectedListener() {
         @Override
         public void onNavigationItemReselected(@NonNull MenuItem item) {
+            DatabaseReference usersRef = mDatabase.getReference().child("orders");
+
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
+                    usersRef.push().setValue(new Order("Sarah Arnolds", "Long Hair Cut"));
                 case R.id.navigation_notifications:
 
                 case R.id.navigation_profile:
@@ -60,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_act);
+
+        mDatabase = FirebaseDatabase.getInstance();
+
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

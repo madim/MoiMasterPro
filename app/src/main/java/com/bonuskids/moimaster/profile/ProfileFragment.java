@@ -74,6 +74,7 @@ public class ProfileFragment extends Fragment {
 
         binding.reviewsList.setLayoutManager(new LinearLayoutManager(context));
         binding.reviewsList.setNestedScrollingEnabled(false);
+
         mReviewAdapter = new FirebaseRecyclerAdapter<Review, ReviewViewHolder>(
                 Review.class,
                 R.layout.review_list_item,

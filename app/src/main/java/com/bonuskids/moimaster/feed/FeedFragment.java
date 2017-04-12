@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.client.util.ExponentialBackOff;
-import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
@@ -43,6 +41,7 @@ import com.google.api.services.calendar.model.EventReminder;
 import com.google.api.services.calendar.model.Events;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -100,7 +99,7 @@ public class FeedFragment extends Fragment
         // Initialize credentials and service object.
         FirebaseUser currrentUser = FirebaseAuth.getInstance().getCurrentUser();
         mCredential = GoogleAccountCredential.usingOAuth2(
-                getContext(), Arrays.asList(SCOPES))
+                getActivity(), Arrays.asList(SCOPES))
                 .setSelectedAccountName(currrentUser.getEmail())
                 .setBackOff(new ExponentialBackOff());
     }
@@ -131,7 +130,7 @@ public class FeedFragment extends Fragment
             }
 
             @Override
-            protected void populateViewHolder(final OrderViewHolder viewHolder, final Order model, int position) {
+            protected void populateViewHolder(final OrderViewHolder viewHolder, final Order model, final int position) {
                 viewHolder.bind(model);
 
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +152,10 @@ public class FeedFragment extends Fragment
                 viewHolder.binding.negativeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (position == RecyclerView.NO_POSITION) {
+                            return;
+                        }
+                        mAdapter.getRef(viewHolder.getAdapterPosition() ).removeValue();
                     }
                 });
             }
@@ -173,7 +175,7 @@ public class FeedFragment extends Fragment
         if (!isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (!isDeviceOnline()) {
-            Toast.makeText(getContext(), "No network connection available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "No network connection available", Toast.LENGTH_SHORT).show();
         } else {
             new MakeRequestTask(mCredential).execute();
         }
@@ -205,7 +207,7 @@ public class FeedFragment extends Fragment
      */
     private boolean isDeviceOnline() {
         ConnectivityManager connMgr =
-                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
     }
@@ -220,7 +222,7 @@ public class FeedFragment extends Fragment
         GoogleApiAvailability apiAvailability =
                 GoogleApiAvailability.getInstance();
         final int connectionStatusCode =
-                apiAvailability.isGooglePlayServicesAvailable(getContext());
+                apiAvailability.isGooglePlayServicesAvailable(getActivity());
         return connectionStatusCode == ConnectionResult.SUCCESS;
     }
 
@@ -232,7 +234,7 @@ public class FeedFragment extends Fragment
         GoogleApiAvailability apiAvailability =
                 GoogleApiAvailability.getInstance();
         final int connectionStatusCode =
-                apiAvailability.isGooglePlayServicesAvailable(getContext());
+                apiAvailability.isGooglePlayServicesAvailable(getActivity());
         if (apiAvailability.isUserResolvableError(connectionStatusCode)) {
             showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
         }

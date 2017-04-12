@@ -25,6 +25,7 @@ public class Order implements Parcelable {
     public Order(String title, String description) {
         this.title = title;
         this.description = description;
+        this.date = "22 TUE, 10 AM";
     }
 
     protected Order(Parcel in) {
